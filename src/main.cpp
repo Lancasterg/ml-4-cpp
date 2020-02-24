@@ -1,8 +1,8 @@
 #include <iostream>
 #include <chrono>
-#include "linalg.h"
-#include "LinearRegressor.h"
-#include "csv.h"
+#include "linear_algebra/linalg.h"
+#include "linear_regression/LinearRegressor.h"
+#include "helpers/csv.h"
 
 using namespace std;
 using namespace std::chrono;

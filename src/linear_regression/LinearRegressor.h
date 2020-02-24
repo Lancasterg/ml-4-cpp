@@ -2,7 +2,7 @@
 #define LINEARREGRESSOR_H_
 
 #include<vector>
-#include"linalg.h"
+#include"../linear_algebra/linalg.h"
 
 using namespace std;
 
