@@ -1,0 +1,9 @@
+*.o
+*.a
+*.d
+*.mk
+.cproject
+.project
+.DS_Store
+.swp
+.settings/
