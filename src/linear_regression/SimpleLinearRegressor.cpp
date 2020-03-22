@@ -22,7 +22,8 @@ SimpleLinearRegressor::SimpleLinearRegressor(int n_features) {
 // Make a prediction
 // - - - - - - - - - - - - - - - -
 double SimpleLinearRegressor::predict(double x){
-	return coefficients[0] + coefficients[1] * x;
+
+	return getCoefficients()[0] + getCoefficients()[1] * x;
 }
 
 // - - - - - - - - - - - - - - - -
@@ -53,8 +54,8 @@ double SimpleLinearRegressor::updateWeights(std::vector<double> X, std::vector<d
 		mse += error;
 	}
 
-	coefficients[0] -= (bias_deriv / X.size()) * learningRate;
-	coefficients[1] -= (weight_deriv / X.size()) * learningRate;
+	getCoefficients()[0] -= (bias_deriv / X.size()) * learningRate;
+	getCoefficients()[1] -= (weight_deriv / X.size()) * learningRate;
 	mse /= X.size();
 
 	return mse;
