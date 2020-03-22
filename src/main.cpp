@@ -1,11 +1,12 @@
 #include <iostream>
 #include <chrono>
 #include "linear_algebra/linalg.h"
-#include "linear_regression/LinearRegressor.h"
 #include "helpers/csv.h"
+#include "linear_regression/SimpleLinearRegressor.h"
 
 using namespace std;
 using namespace std::chrono;
+using namespace ml4cpp;
 
 Matrix readCsv(string file){
 	io::CSVReader<2> in(file);
@@ -20,15 +21,16 @@ Matrix readCsv(string file){
 	return ret;
 }
 
-int main() {
-	string file = "/Users/george/eclipse-workspace/ml-4-cpp/data/linear_regression_data.csv";
+int main(int argc, char** argv) {
+	string file = argv[1];
+
 	Matrix df = readCsv(file);
 
 	vector<double> X = df[0];
 	vector<double> Y = df[1];
 
 	LinearAlgebra linalg;
-	LinearRegressor model(1);
+	SimpleLinearRegressor model(1);
 	auto start = high_resolution_clock::now();
 	model.fit(X, Y, 0.0000001, 100000);
 	auto stop = high_resolution_clock::now();

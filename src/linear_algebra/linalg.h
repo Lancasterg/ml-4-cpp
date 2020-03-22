@@ -1,38 +1,38 @@
 #ifndef LINALG_H_
 #define LINALG_H_
 
-#include<vector>
-#include<iostream>
-#include<cstdio>
+#include <vector>
+#include <iostream>
+#include <cstdio>
 
-#define Matrix vector<vector<double>>
+#define Matrix std::vector<std::vector<double>>
 
-using namespace std;
+namespace ml4cpp{
 
-class LinearAlgebra
-{
-private:
-	void printColumnVector(vector<double> vec);
+	class LinearAlgebra
+	{
+	private:
+		void printColumnVector(std::vector<double> vec);
 
-public:
+	public:
 
-	// Constructor
-    LinearAlgebra();
+		// Constructor
+		LinearAlgebra();
 
-    vector<double> addVectors(vector<double> a, vector<double> b);
-    vector<double> scalarMult(double s, vector<double> v);
+		std::vector<double> addVectors(std::vector<double> a, std::vector<double> b);
+		std::vector<double> scalarMult(double s, std::vector<double> v);
 
-    double dotProd(vector<double> a, vector<double> b);
+		double dotProd(std::vector<double> a, std::vector<double> b);
 
-    Matrix scalarMatMult(double s, Matrix m);
+		Matrix scalarMatMult(double s, Matrix m);
 
-    Matrix matMult(Matrix a, Matrix b);
-    Matrix transpose(Matrix mat);
+		Matrix matMult(Matrix a, Matrix b);
+		Matrix transpose(Matrix mat);
 
-    void printVector(vector<double> vec);
-    void printMatrix(Matrix mat);
+		void printVector(std::vector<double> vec);
+		void printMatrix(Matrix mat);
 
+	};
 };
-
 #endif
 
