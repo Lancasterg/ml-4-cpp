@@ -22,7 +22,11 @@ namespace ml4cpp {
 		std::vector<double> getCoefficients(){return coefficients;};
 
 		// Make a prediction
-//		double predict(double x) = 0;
+		double predict(double x);
+
+		// Fit the model
+		void fit(std::vector<double> X, std::vector<double> Y);
+
 
 
 

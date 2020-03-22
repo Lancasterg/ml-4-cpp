@@ -13,13 +13,18 @@ namespace ml4cpp{
 		LinearAlgebra linalg;
 
 		double updateWeights(std::vector<double> X, std::vector<double> Y, double learningRate);
-
 	public:
 		MultipleLinearRegressor(){};
+		MultipleLinearRegressor(int n_features);
 
-		// Getter / setter methods
-		void setCoefficients(std::vector<double> coeff){coefficients = coeff;};
-		std::vector<double> getCoefficients(){return coefficients;};
+		int getNumCoefficients(){ return getCoefficients().size(); }
+
+		// Make a predicition
+		double predict(std::vector<double> X);
+
+
+		// Fit the model
+		void fit(Matrix X, std::vector<double> Y);
 
 	};
 }
