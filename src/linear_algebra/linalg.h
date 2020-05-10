@@ -7,32 +7,34 @@
 
 #define Matrix std::vector<std::vector<double>>
 
-namespace ml4cpp{
+namespace ml4cpp {
 
-	class LinearAlgebra
-	{
-	private:
-		void printColumnVector(std::vector<double> vec);
+    class LinearAlgebra {
+    private:
+        static void printColumnVector(std::vector<double> vec);
 
-	public:
+    public:
 
-		// Constructor
-		LinearAlgebra();
+        // Constructor
+        LinearAlgebra();
 
-		std::vector<double> addVectors(std::vector<double> a, std::vector<double> b);
-		std::vector<double> scalarMult(double s, std::vector<double> v);
+        static std::vector<double> addVectors(std::vector<double> a, std::vector<double> b);
 
-		double dotProd(std::vector<double> a, std::vector<double> b);
+        static std::vector<double> scalarMult(double s, std::vector<double> v);
 
-		Matrix scalarMatMult(double s, Matrix m);
+        static double dotProd(std::vector<double> a, std::vector<double> b);
 
-		Matrix matMult(Matrix a, Matrix b);
-		Matrix transpose(Matrix mat);
+        static Matrix scalarMatMult(double s, Matrix m);
 
-		void printVector(std::vector<double> vec);
-		void printMatrix(Matrix mat);
+        static Matrix matMult(Matrix a, Matrix b);
 
-	};
+        static Matrix transpose(Matrix mat);
+
+        static void printVector(std::vector<double> vec);
+
+        void printMatrix(Matrix mat);
+
+    };
 };
 #endif
 

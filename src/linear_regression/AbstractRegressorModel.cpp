@@ -9,13 +9,13 @@
 
 namespace ml4cpp {
 
-AbstractRegressorModel::AbstractRegressorModel() {
-	// TODO Auto-generated constructor stub
+    AbstractRegressorModel::AbstractRegressorModel() {
+        // TODO Auto-generated constructor stub
 
-}
+    }
 
-AbstractRegressorModel::~AbstractRegressorModel() {
-	// TODO Auto-generated destructor stub
-}
+    AbstractRegressorModel::~AbstractRegressorModel() {
+        // TODO Auto-generated destructor stub
+    }
 
 } /* namespace ml4cpp */

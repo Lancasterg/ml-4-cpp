@@ -7,5 +7,14 @@
 .DS_Store
 .swp
 .settings/
+
+# Eclipse project file
 Debug/ml-4-cpp
 Debug/src
+
+# Clion build
+cmake-build-debug
+.settings
+
+.idea
+
