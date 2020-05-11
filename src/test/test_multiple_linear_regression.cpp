@@ -40,7 +40,9 @@ TEST_CASE("Test multiple regression fitting", "[classic]") {
 
     model.fit(X, Y);
 
-    std::cout << model.meanSquaredError(X, Y);
+    std::cout << 'mse:' <<sqrt(model.meanSquaredError(X, Y));
+    std::cout <<
+
 
 }
 

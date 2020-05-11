@@ -16,8 +16,8 @@ namespace ml4cpp {
      * @param n_features: number of features = number of coefficients
      */
     MultipleLinearRegressor::MultipleLinearRegressor(int n_features) {
-        bias = 0;
-        coefficients = std::vector<double>(n_features, 0);
+        bias = 1;
+        coefficients = std::vector<double>(n_features, 1);
     }
 
     /**
@@ -46,8 +46,8 @@ namespace ml4cpp {
      * @param Y: Target values
      */
     void MultipleLinearRegressor::fit(Matrix X, std::vector<double> Y) {
-        double error, bias_deriv;
-        double learningRate = 0.000001;
+        double error, bias_deriv, coeff_deriv;
+        double learningRate = 0.001;
         std::vector<double> weightDerivatives(coefficients.size(), 0);
         int n_iters = 100;
 
@@ -55,10 +55,11 @@ namespace ml4cpp {
             for (int i = 0; i < X[0].size(); i++) {
                 std::vector<double> x = {X[0][i], X[1][i], X[2][i], X[3][i]};
                 error = Y[i] - predict(x);
-                bias_deriv += -2 * error;
-                bias -= (bias_deriv / X.size()) * learningRate;
+                bias_deriv = -2 * bias * error;
+                bias -= (bias_deriv) * learningRate;
                 for (int j = 0; j < weightDerivatives.size(); j++) {
-                    coefficients[j] -= (-2 * x[j] * error) * learningRate;
+                    coeff_deriv = -2 * x[j] * error;
+                    coefficients[j] -= coeff_deriv * learningRate;
                 }
             }
         }
