@@ -6,60 +6,71 @@
  */
 
 #include "MultipleLinearRegressor.h"
+#include <cmath>
 
 namespace ml4cpp {
 
 
-    // - - - - - - - - - - - - - - - -
-    // Initalise coefficients to 0, except first coeff
-    // - - - - - - - - - - - - - - - -
+    /**
+     * Initialise coefficients to 0, except for the first
+     * @param n_features: number of features = number of coefficients
+     */
     MultipleLinearRegressor::MultipleLinearRegressor(int n_features) {
-        std::vector<double> coeffs(n_features, 0);
-        coeffs[0] = 1;
-        setCoefficients(coeffs);
+        bias = 0;
+        coefficients = std::vector<double>(n_features, 0);
     }
 
-    // - - - - - - - - - - - - - - - -
-    // Make a prediction
-    // - - - - - - - - - - - - - - - -
-    double MultipleLinearRegressor::predict(std::vector<double> X) {
-        std::cout << X.size() << ", " << getNumCoefficients();
+    /**
+     * Set the coefficients for prediction
+     * @param add_coeff: The additive coefficient
+     * @param coeff: The multiplicative coefficients
+     */
+    void MultipleLinearRegressor::setCoefficients(double add_coeff, std::vector<double> coeff) {
+        bias = add_coeff;
+        coefficients = coeff;
+    }
 
-        return linalg.dotProd(X, getCoefficients());
+    /**
+     * Make a prediction
+     * @param X: Feature vector
+     * @return result of prediction
+     */
+    double MultipleLinearRegressor::predict(const std::vector<double> &X) {
+        return bias + ml4cpp::LinearAlgebra::dotProd(X, coefficients);
     }
 
 
-    // - - - - - - - - - - - - - - - -
-    // Fit the model using stochastic gradient descent
-    // - - - - - - - - - - - - - - - -
+    /**
+     * Fit the model using stochastic gradient descent.
+     * @param X: Training values
+     * @param Y: Target values
+     */
     void MultipleLinearRegressor::fit(Matrix X, std::vector<double> Y) {
-        double error;
-        std::vector<double> weightDerivatives(getNumCoefficients(), 0);
+        double error, bias_deriv;
+        double learningRate = 0.000001;
+        std::vector<double> weightDerivatives(coefficients.size(), 0);
         int n_iters = 100;
 
-        for (int i = 0; i < X[0].size(); i++) {
-
-//			std::vector<double> abc;
-//
-//			for(int j = 0; j < X.size(); j++){
-//
-//				abc.push_back(X[i][j]);
-//
-//			}
-//			error = Y[i] - predict(abc);
-//			std::cout << error;
-
+        for (int iter = 0; iter < n_iters; iter++) {
+            for (int i = 0; i < X[0].size(); i++) {
+                std::vector<double> x = {X[0][i], X[1][i], X[2][i], X[3][i]};
+                error = Y[i] - predict(x);
+                bias_deriv += -2 * error;
+                bias -= (bias_deriv / X.size()) * learningRate;
+                for (int j = 0; j < weightDerivatives.size(); j++) {
+                    coefficients[j] -= (-2 * x[j] * error) * learningRate;
+                }
+            }
         }
-
-
     }
 
-
-    double MultipleLinearRegressor::updateWeights(std::vector<double> X, std::vector<double> Y, double learningRate) {
-
-
-        return 0;
+    double MultipleLinearRegressor::meanSquaredError(std::vector<std::vector<double>> X, std::vector<double> Y) {
+        double error = 0;
+        for (int i = 0; i < X.size(); i++) {
+            std::vector<double> x = {X[i][0], X[i][1], X[i][2], X[i][3]};
+            error += pow((Y[i] - predict(x)), 2);
+        }
+        return error / X.size();
     }
-
 }
 

@@ -1,10 +1,12 @@
 #include "linalg.h"
-
+#include <numeric>
+#include <cmath>
 
 namespace ml4cpp {
 
 
     LinearAlgebra::LinearAlgebra() = default;
+
 
     /**
      * Return the sum of two vectors.
@@ -50,7 +52,7 @@ namespace ml4cpp {
      * @param b: Matrix b
      * @return product of a and b
      */
-    Matrix LinearAlgebra::matMult(Matrix a, Matrix b) {
+    Matrix LinearAlgebra::matMultSquare(Matrix a, Matrix b) {
 
         if (a[1].size() != b.size()) {
             printf("Vectors must be the same length");
@@ -60,7 +62,6 @@ namespace ml4cpp {
         // Instantiate result matrix
         std::vector<std::vector<double>> mat(a.size());
 
-        std::cout << mat.size() << "\n";
         for (int i = 0; i < b[1].size(); i++) {
             mat[i].resize(b[1].size());
         }
@@ -155,6 +156,27 @@ namespace ml4cpp {
     }
 
     Matrix LinearAlgebra::transpose(Matrix mat) {
+        return mat;
+    }
+
+    Matrix LinearAlgebra::normaliseData(std::vector<std::vector<double>> mat) {
+        std::vector<double> means(mat.size());
+        std::vector<double> std_devs(mat.size());
+
+        for (int i = 0; i < mat.size(); i++){
+            means[i] = std::accumulate(mat[i].begin(), mat[i].end(), 0.0);
+            means[i] /= mat[i].size();
+
+            double sq_sum = std::inner_product(mat[i].begin(), mat[i].end(), mat[i].begin(), 0.0);
+            std_devs[i] = std::sqrt(sq_sum / mat[i].size() - means[i] * means[i]);
+        }
+
+        for (int i = 0; i < mat.size(); i++){
+            for (int j = 0; j < mat[i].size(); j++){
+                mat[i][j] = (mat[i][j] - means[i]) / std_devs[i];
+            }
+        }
+
         return mat;
     }
 };

@@ -18,4 +18,12 @@ namespace ml4cpp {
         // TODO Auto-generated destructor stub
     }
 
+    double AbstractRegressorModel::predict(double x) {
+        return 0;
+    }
+
+    void AbstractRegressorModel::fit(std::vector<double> X, std::vector<double> Y) {
+
+    }
+
 } /* namespace ml4cpp */

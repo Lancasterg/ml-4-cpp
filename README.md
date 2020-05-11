@@ -6,13 +6,6 @@ Implementation of some ML algorithms and basic linear algebra in C++, written fr
 - LogisticRegressor (Not yet implemented)
 - ...
 
-## To run
-```
-$ cd Debug
-$ make
-$ ./ml-4-cpp /full/path/to/your/data.csv
-```
-
 ## TODOs
 - Write a high-performance version of the linalg class.
 - Write tests for SimpleLinearRegressor

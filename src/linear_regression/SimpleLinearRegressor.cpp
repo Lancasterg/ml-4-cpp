@@ -6,8 +6,7 @@
  */
 
 #include "SimpleLinearRegressor.h"
-#include <math.h>
-#include <stdlib.h>
+#include <cmath>
 
 namespace ml4cpp {
 
@@ -18,17 +17,22 @@ namespace ml4cpp {
         setCoefficients(coeffs);
     }
 
-    // - - - - - - - - - - - - - - - -
-    // Make a prediction
-    // - - - - - - - - - - - - - - - -
+    /**
+     * Make a prediction
+     * @param x: Input value
+     * @return:: Output prediction
+     */
     double SimpleLinearRegressor::predict(double x) {
-
         return getCoefficients()[0] + getCoefficients()[1] * x;
     }
 
-    // - - - - - - - - - - - - - - - -
-    // Calculate MSE over entire data set
-    // - - - - - - - - - - - - - - - -
+
+    /**
+     * Calculate MSE over entire data set
+     * @param X: Training values
+     * @param Y: Target values
+     * @return
+     */
     double SimpleLinearRegressor::meanSquaredError(std::vector<double> X, std::vector<double> Y) {
         double error = 0;
         for (int i = 0; i < X.size(); i++) {
@@ -38,9 +42,13 @@ namespace ml4cpp {
     }
 
 
-    // - - - - - - - - - - - - - - - -
-    // Update weights using gradient descent
-    // - - - - - - - - - - - - - - - -
+    /**
+     * Update weights using gradient descent
+     * @param X: Training data
+     * @param Y: Target values
+     * @param learningRate: Rate at which to update weights
+     * @return
+     */
     double SimpleLinearRegressor::updateWeights(std::vector<double> X, std::vector<double> Y, double learningRate) {
         double bias_deriv = 0;
         double weight_deriv = 0;
@@ -61,9 +69,13 @@ namespace ml4cpp {
         return mse;
     }
 
-    // - - - - - - - - - - - - - - - -
-    // Fit the linear regression model
-    // - - - - - - - - - - - - - - - -
+    /**
+     * Fit the linear regression model
+     * @param X: Training data
+     * @param Y: Target values
+     * @param learningRate: Rate at which to update weights
+     * @param iterations: Number of training iterations
+     */
     void SimpleLinearRegressor::fit(std::vector<double> X, std::vector<double> Y, double learningRate, int iterations) {
         double mse = 0;
         double prev_mse = -1;
@@ -76,7 +88,9 @@ namespace ml4cpp {
             }
             prev_mse = mse;
         }
+    }
 
+    void SimpleLinearRegressor::gradientDescent() {
 
     }
 

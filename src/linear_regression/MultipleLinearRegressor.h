@@ -9,25 +9,25 @@ namespace ml4cpp {
 
     class MultipleLinearRegressor : public AbstractRegressorModel {
     private:
+        double bias;
         std::vector<double> coefficients;
-        LinearAlgebra linalg;
 
         double updateWeights(std::vector<double> X, std::vector<double> Y, double learningRate);
 
     public:
-        MultipleLinearRegressor() {};
+        MultipleLinearRegressor() = default;
 
-        MultipleLinearRegressor(int n_features);
-
-        int getNumCoefficients() { return getCoefficients().size(); }
+        explicit MultipleLinearRegressor(int n_features);
 
         // Make a predicition
-        double predict(std::vector<double> X);
-
+        double predict(const std::vector<double>& X);
 
         // Fit the model
         void fit(Matrix X, std::vector<double> Y);
 
+        void setCoefficients(double add_coeff, std::vector<double> coeff);
+
+        double meanSquaredError(Matrix X, std::vector<double> Y);
     };
 }
 

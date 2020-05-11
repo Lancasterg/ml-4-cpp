@@ -26,13 +26,16 @@ namespace ml4cpp {
 
         static Matrix scalarMatMult(double s, Matrix m);
 
-        static Matrix matMult(Matrix a, Matrix b);
+        static Matrix matMultSquare(Matrix a, Matrix b);
 
         static Matrix transpose(Matrix mat);
 
         static void printVector(std::vector<double> vec);
 
         void printMatrix(Matrix mat);
+
+        Matrix static normaliseData(Matrix mat);
+
 
     };
 };

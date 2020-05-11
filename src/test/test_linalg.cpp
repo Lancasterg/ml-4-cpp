@@ -1,5 +1,3 @@
-#define CATCH_CONFIG_MAIN
-
 #include "../libs/catch.hpp"
 #include "../linear_algebra/linalg.h"
 #include <vector>
@@ -79,18 +77,22 @@ void testScalarMatMult(double s, Matrix m, Matrix truth) {
  * @param b: Second matrix used in product
  * @param truth: Truth matrix ab
  */
-void testMatMult(Matrix a, Matrix b, Matrix truth) {
-    Matrix result = ml4cpp::LinearAlgebra::matMult(a, b);
+void testMatMultSquare(Matrix a, Matrix b, Matrix truth) {
+    Matrix result = ml4cpp::LinearAlgebra::matMultSquare(a, b);
     compareMatrices(result, truth);
 }
 
 TEST_CASE("Test vector addition", "[classic]") {
 
     // Test 1
-    testVectorAddition({1, 2, 3, 4}, {9, 10, 20, 5}, {10, 12, 23, 9});
+    testVectorAddition({1, 2, 3, 4},
+                       {9, 10, 20, 5},
+                       {10, 12, 23, 9});
 
     // Test 2
-    testVectorAddition({100, 300, 999, 1}, {200, 10, 1, 5}, {300, 310, 1000, 6});
+    testVectorAddition({100, 300, 999, 1},
+                       {200, 10, 1, 5},
+                       {300, 310, 1000, 6});
 
     // Test 3
     testVectorAddition({0.5555555, 100000, 0.9, 10, 50},
@@ -139,27 +141,31 @@ TEST_CASE("Test matrix scalar multiplication", "[classic]") {
 
     // Test 3
     testScalarMatMult(0.1, {{100,    250},
-                            {100000, 0.5}}, {{10, 25}, {10000, 0.05}});
+                            {100000, 0.5}}, {{10,    25},
+                                             {10000, 0.05}});
 
 }
 
 TEST_CASE("Test matrix, matrix multiplication", "[classic]") {
 
+
     // Test 1
-    testMatMult({{10, 20, 30},
-                 {30, 40, 50}}, {{100, 200},
-                                 {300, 400},
-                                 {500, 600}}, {{22000, 28000}, {40000, 52000}});
+    testMatMultSquare({{1, 2},
+                       {3, 4}}, {{5, 6},
+                                 {7, 8}}, {{19, 22},
+                                           {43, 50}});
 
     // Test 2
-    testMatMult({{100, 0.5, 0.5, 1},
-                 {1,   1,   1,   0.5}}, {{1, 2},
-                                         {3, 4},
-                                         {5, 6},
-                                         {7, 8}}, {{111, 113},
-                                                   {12.5, 15}});
+    testMatMultSquare({{0.5, 10},
+                       {22,  3}}, {{0.9, 0.9},
+                                   {1,   7000}}, {{10.45, 70000.45},
+                                                  {22.8,  21019.8}});
 
-    testMatMult({{1,2},{3,4}}, {{5,6},{7,8}}, {{19,22}, {43,50}});
+    // Test 3
+    testMatMultSquare({{1, 0},
+                       {0, 1}}, {{50, 60},
+                                 {70, 80}}, {{50, 60},
+                                             {70, 80}});
 
 
 }
