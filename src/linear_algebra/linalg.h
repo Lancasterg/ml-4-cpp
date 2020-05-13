@@ -34,7 +34,10 @@ namespace ml4cpp {
 
         void printMatrix(Matrix mat);
 
-        Matrix static normaliseData(Matrix mat);
+        static Matrix normaliseDataRm(Matrix mat);
+
+        static Matrix normaliseDataCm(Matrix mat);
+
 
 
     };

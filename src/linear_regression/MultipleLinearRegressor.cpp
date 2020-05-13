@@ -6,7 +6,9 @@
  */
 
 #include "MultipleLinearRegressor.h"
+#include "FileReader.h"
 #include <cmath>
+#include <utility>
 
 namespace ml4cpp {
 
@@ -18,6 +20,7 @@ namespace ml4cpp {
     MultipleLinearRegressor::MultipleLinearRegressor(int n_features) {
         bias = 1;
         coefficients = std::vector<double>(n_features, 1);
+        num_coefficients = n_features;
     }
 
     /**
@@ -27,7 +30,8 @@ namespace ml4cpp {
      */
     void MultipleLinearRegressor::setCoefficients(double add_coeff, std::vector<double> coeff) {
         bias = add_coeff;
-        coefficients = coeff;
+        coefficients = std::move(coeff);
+        num_coefficients = int(coefficients.size());
     }
 
     /**
@@ -48,16 +52,17 @@ namespace ml4cpp {
     void MultipleLinearRegressor::fit(Matrix X, std::vector<double> Y) {
         double error, bias_deriv, coeff_deriv;
         double learningRate = 0.001;
-        std::vector<double> weightDerivatives(coefficients.size(), 0);
-        int n_iters = 1000;
+        std::vector<double> x;
+        int n_iters = 100;
 
         for (int iter = 0; iter < n_iters; iter++) {
-            for (int i = 0; i < X[0].size(); i++) {
-                std::vector<double> x = {X[0][i], X[1][i], X[2][i], X[3][i]};
+            for (size_t i = 0; i < X[0].size(); i++) {
+                x = ml4cpp::FileReader::getRow(i, X);
                 error = Y[i] - predict(x);
                 bias_deriv = -2 * bias * error;
                 bias -= (bias_deriv) * learningRate;
-                for (int j = 0; j < weightDerivatives.size(); j++) {
+
+                for (size_t j = 0; j < coefficients.size(); j++) {
                     coeff_deriv = -2 * x[j] * error;
                     coefficients[j] -= coeff_deriv * learningRate;
                 }
@@ -73,11 +78,13 @@ namespace ml4cpp {
      */
     double MultipleLinearRegressor::meanSquaredError(std::vector<std::vector<double>> X, std::vector<double> Y) {
         double error = 0;
-        for (int i = 0; i < X[i].size(); i++) {
-            std::vector<double> x = {X[0][i], X[1][i], X[2][i], X[3][i]};
-            error += (Y[i] - predict(x));
+        std::vector<double> x;
+
+        for (size_t i = 0; i < X[0].size(); i++) {
+            x = {X[0][i], X[1][i], X[2][i], X[3][i]};
+            error += pow(Y[i] - predict(x), 2);
         }
-        return pow(error,2) / X.size();
+        return error / X[0].size();
     }
 }
 

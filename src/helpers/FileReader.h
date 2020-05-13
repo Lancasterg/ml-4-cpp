@@ -14,9 +14,25 @@
 namespace ml4cpp {
 
     class FileReader {
+    private:
+        std::vector<std::vector<double>> readMultipleCsvCm_4(std::string file);
+        std::vector<std::vector<double>> readMultipleCsvCm_5(std::string file);
+
+        std::vector<std::vector<double>> readSimpleCsvRm(std::string basicString);
+        std::vector<std::vector<double>> readMultipleCsvRm_3(std::string file);
+        std::vector<std::vector<double>> readMultipleCsvRm_4(std::string file);
+        std::vector<std::vector<double>> readMultipleCsvRm_5(std::string file);
+
     public:
-        Matrix readSimpleCsv(std::string file);
-        Matrix readMultipleCsv(std::string file);
+        FileReader() = default;
+
+        Matrix readSimpleCsvCm(std::string file);
+        static std::vector<double> getRow(int rowNum, Matrix data);
+
+
+        std::vector<std::vector<double>> readCsvCm(std::string file, int numCols);
+        std::vector<std::vector<double>> readCsvRm(std::string file, int numCols);
+
 
 
     };

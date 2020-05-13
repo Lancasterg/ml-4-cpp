@@ -1,5 +1,6 @@
 #include <iostream>
 #include <chrono>
+#include <BinaryLogisticRegressor.h>
 #include "linear_algebra/linalg.h"
 #include "linear_regression/SimpleLinearRegressor.h"
 #include "linear_regression/MultipleLinearRegressor.h"
@@ -49,19 +50,51 @@ void runMultipleLinearRegression(Matrix mat){
 
 }
 
+void runLogisticRegression(Matrix mat){
+    int numFeatures = 3;
+
+    std::vector<std::vector<double>> X(mat.size());
+    std::vector<double> Y(mat.size());
+
+    for (size_t i = 0; i < mat.size(); i++) {
+        X[i] = std::vector<double>(mat[i].begin(), mat[i].begin() + numFeatures);
+        Y[i] = mat[i][numFeatures];
+    }
+
+    X = ml4cpp::LinearAlgebra::normaliseDataRm(X);
+    BinaryLogisticRegressorRm model(numFeatures);
+    model.fit(X, Y);
+    model.evaluate(X, Y);
+
+
+}
+
 int main(int argc, char** argv) {
 
-    if (argc != 2){
+    if (argc != 3){
         throw runtime_error("Must specify input data location.");
     }
 
-    FileReader fileReader;
+
 	string file = argv[1];
+    string algorithm = argv[2];
+	int ncols = atoi(argv[3]);
 
-//	string file = "/Users/george/eclipse-workspace/ml-4-cpp/data/multiple_linear_regression_data.csv";
-	Matrix mat = fileReader.readMultipleCsv(file);
-	runMultipleLinearRegression(mat);
+    FileReader fileReader;
+	Matrix mat = fileReader.readCsvRm(file, ncols);
 
+	// Multiple linear regression
+	if (algorithm == "mlr"){
+        runMultipleLinearRegression(mat);
+    }
+	// Simple linear regression
+	else if (algorithm == "slr"){
+	    runSimpleLinearRegression(mat);
+	}
+	// Logistic regression
+	else if (algorithm == "lr"){
+	    runLogisticRegression(mat);
+	}
 
 	return 0;
 }

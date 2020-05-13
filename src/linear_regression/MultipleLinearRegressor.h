@@ -11,6 +11,7 @@ namespace ml4cpp {
     private:
         double bias;
         std::vector<double> coefficients;
+        int num_coefficients;
 
     public:
         MultipleLinearRegressor() = default;

@@ -12,7 +12,8 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 include_directories(src/helpers
         src/linear_algebra
-        src/linear_regression)
+        src/linear_regression
+        src/logistic_regression)
 
 add_executable(
         ml_4_cpp
@@ -28,7 +29,8 @@ add_executable(
         src/main.cpp
         src/helpers/FileReader.cpp
         src/helpers/FileReader.h
-        )
+        src/logistic_regression/BinaryLogisticRegressor.cpp
+        src/logistic_regression/BinaryLogisticRegressor.h)
 
 add_executable(
         tests
@@ -37,15 +39,21 @@ add_executable(
         src/test/test_linalg.cpp
         src/test/test_simple_linear_regression.cpp
         src/test/test_multiple_linear_regression.cpp
+        src/test/test_binary_logistic_regression.cpp
+
         src/linear_algebra/linalg.cpp
         src/linear_algebra/linalg.h
+
         src/linear_regression/AbstractRegressorModel.cpp
         src/linear_regression/AbstractRegressorModel.h
         src/linear_regression/MultipleLinearRegressor.cpp
         src/linear_regression/MultipleLinearRegressor.h
         src/linear_regression/SimpleLinearRegressor.cpp
         src/linear_regression/SimpleLinearRegressor.h
+        src/logistic_regression/BinaryLogisticRegressor.cpp
+        src/logistic_regression/BinaryLogisticRegressor.h
+
         src/helpers/FileReader.cpp
         src/helpers/FileReader.h
         src/libs/csv.h
-        )
+)

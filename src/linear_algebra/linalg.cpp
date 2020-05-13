@@ -159,7 +159,7 @@ namespace ml4cpp {
         return mat;
     }
 
-    Matrix LinearAlgebra::normaliseData(std::vector<std::vector<double>> mat) {
+    Matrix LinearAlgebra::normaliseDataCm(std::vector<std::vector<double>> mat) {
         std::vector<double> means(mat.size());
         std::vector<double> std_devs(mat.size());
 
@@ -179,4 +179,39 @@ namespace ml4cpp {
 
         return mat;
     }
+
+
+    Matrix LinearAlgebra::normaliseDataRm(std::vector<std::vector<double>> mat) {
+        int n_features = mat[0].size();
+        int n_rows = mat.size();
+        std::vector<double> means(n_features);
+        std::vector<double> std_devs(n_features);
+
+        for (int i = 0; i < n_rows; i++){
+            for (int j = 0; j < n_features; j++){
+                means[j] += mat[i][j];
+            }
+        }
+        for (int j = 0; j < n_features; j++){
+            means[j] /= mat.size();
+        }
+        for (int i = 0; i < n_rows; i++){
+            for (int j = 0; j < n_features; j++){
+                std_devs[j] += pow(mat[i][j] - means[j], 2);
+            }
+        }
+        for (int j = 0; j < n_features; j++){
+            std_devs[j] = sqrt(std_devs[j] /= mat.size());
+        }
+        for (int i = 0; i < n_rows; i++){
+            for (int j = 0; j < n_features; j++){
+                mat[i][j] = (mat[i][j] - means[j]) / std_devs[j];
+            }
+        }
+        return mat;
+    }
+
+
+
+
 };
