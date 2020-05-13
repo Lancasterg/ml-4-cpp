@@ -3,7 +3,7 @@ Implementation of some ML algorithms and basic linear algebra in C++, written fr
 
 - SimpleLinearRegressor
 - MultipleLinearRegressor
-- BinaryLogisticRegressor (Not yet implemented)
+- BinaryLogisticRegressor
 - ...
 
 ## TODOs
