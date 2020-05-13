@@ -1,5 +1,5 @@
 # ml-4-cpp
-Implementation of some ML algorithms and basic linear algebra in C++, written from scratch.
+Implementation of some ML algorithms and basic linear algebra in C++ written from scratch.
 
 - SimpleLinearRegressor
 - MultipleLinearRegressor
