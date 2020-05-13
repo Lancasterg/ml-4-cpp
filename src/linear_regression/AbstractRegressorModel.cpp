@@ -18,7 +18,7 @@ namespace ml4cpp {
         // TODO Auto-generated destructor stub
     }
 
-    double AbstractRegressorModel::predict(double x) {
+    double AbstractRegressorModel::predict(const double &x) {
         return 0;
     }
 

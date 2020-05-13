@@ -49,7 +49,7 @@ namespace ml4cpp {
         double error, bias_deriv, coeff_deriv;
         double learningRate = 0.001;
         std::vector<double> weightDerivatives(coefficients.size(), 0);
-        int n_iters = 100;
+        int n_iters = 1000;
 
         for (int iter = 0; iter < n_iters; iter++) {
             for (int i = 0; i < X[0].size(); i++) {
@@ -65,13 +65,19 @@ namespace ml4cpp {
         }
     }
 
+    /**
+     * Calculate the mean squared error over a dataset.
+     * @param X: Feature vector
+     * @param Y: Target predictions
+     * @return
+     */
     double MultipleLinearRegressor::meanSquaredError(std::vector<std::vector<double>> X, std::vector<double> Y) {
         double error = 0;
-        for (int i = 0; i < X.size(); i++) {
-            std::vector<double> x = {X[i][0], X[i][1], X[i][2], X[i][3]};
-            error += pow((Y[i] - predict(x)), 2);
+        for (int i = 0; i < X[i].size(); i++) {
+            std::vector<double> x = {X[0][i], X[1][i], X[2][i], X[3][i]};
+            error += (Y[i] - predict(x));
         }
-        return error / X.size();
+        return pow(error,2) / X.size();
     }
 }
 

@@ -25,8 +25,8 @@ TEST_CASE("Test multiple regression fitting", "[classic]") {
     std::string test_path = "/Users/george/eclipse-workspace/ml-4-cpp/data/multiple_linear_regression_data.csv";
     ml4cpp::FileReader fileReader;
 
-    Matrix X;
     Matrix mat = fileReader.readMultipleCsv(test_path);
+    Matrix X;
 
     for (int i = 0; i < mat.size() - 1; i++) {
         X.push_back(mat[i]);
@@ -40,9 +40,7 @@ TEST_CASE("Test multiple regression fitting", "[classic]") {
 
     model.fit(X, Y);
 
-    std::cout << 'mse:' <<sqrt(model.meanSquaredError(X, Y));
-    std::cout <<
-
+    std::cout << 'mse:' << sqrt(model.meanSquaredError(X, Y));
 
 }
 

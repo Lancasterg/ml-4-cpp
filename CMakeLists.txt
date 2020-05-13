@@ -1,7 +1,14 @@
+if(NOT CMAKE_BUILD_TYPE)
+        set(CMAKE_BUILD_TYPE Debug)
+endif()
+
 cmake_minimum_required(VERSION 3.16)
 project(ml_4_cpp)
 
 set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_FLAGS "-Wall -Wextra")
+set(CMAKE_CXX_FLAGS_DEBUG "-g")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 include_directories(src/helpers
         src/linear_algebra

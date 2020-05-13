@@ -21,7 +21,7 @@ namespace ml4cpp {
         std::vector<double> getCoefficients() { return coefficients; };
 
         // Make a prediction
-        virtual double predict(double x);
+        virtual double predict(const double &x);
 
         // Fit the model
         void fit(std::vector<double> X, std::vector<double> Y);

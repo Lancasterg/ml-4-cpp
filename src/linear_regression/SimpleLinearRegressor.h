@@ -19,13 +19,12 @@ namespace ml4cpp {
 
         explicit SimpleLinearRegressor(int n_features);
 
-
         void fit(std::vector<double> x, std::vector<double> y, double learningRate, int iterations);
 
         void gradientDescent(); // TODO??
         double meanSquaredError(std::vector<double> X, std::vector<double> Y);
 
-        double predict(double x) override;
+        double predict(const double &x) override;
 
     };
 };

@@ -22,7 +22,7 @@ namespace ml4cpp {
      * @param x: Input value
      * @return:: Output prediction
      */
-    double SimpleLinearRegressor::predict(double x) {
+    double SimpleLinearRegressor::predict(const double &x) {
         return getCoefficients()[0] + getCoefficients()[1] * x;
     }
 

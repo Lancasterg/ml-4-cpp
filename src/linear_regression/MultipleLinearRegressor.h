@@ -12,14 +12,11 @@ namespace ml4cpp {
         double bias;
         std::vector<double> coefficients;
 
-        double updateWeights(std::vector<double> X, std::vector<double> Y, double learningRate);
-
     public:
         MultipleLinearRegressor() = default;
 
         explicit MultipleLinearRegressor(int n_features);
 
-        // Make a predicition
         double predict(const std::vector<double>& X);
 
         // Fit the model
