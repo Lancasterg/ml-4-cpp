@@ -75,7 +75,6 @@ int main(int argc, char** argv) {
         throw runtime_error("Must specify input data location.");
     }
 
-
 	string file = argv[1];
     string algorithm = argv[2];
 	int ncols = atoi(argv[3]);

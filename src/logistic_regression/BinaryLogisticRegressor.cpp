@@ -45,6 +45,14 @@ namespace ml4cpp {
         // Do nothing
     }
 
+    /**
+     * Getter method for coefficients
+     * @return
+     */
+    std::vector<double> AbstractBinaryLogisticRegressor::getCoefficients() {
+        return coefficients;
+    }
+
 
     /**
      * Constructor for BinaryLogisticRegressor

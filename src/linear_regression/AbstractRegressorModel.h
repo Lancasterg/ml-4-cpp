@@ -15,8 +15,7 @@ namespace ml4cpp {
 
         virtual ~AbstractRegressorModel();
 
-        virtual // Getter / setter methods
-        void setCoefficients(std::vector<double> coeff) { coefficients = coeff; };
+        virtual void setCoefficients(std::vector<double> coeff);
 
         std::vector<double> getCoefficients() { return coefficients; };
 

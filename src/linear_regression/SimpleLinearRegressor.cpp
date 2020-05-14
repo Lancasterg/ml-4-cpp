@@ -10,11 +10,12 @@
 
 namespace ml4cpp {
 
+    SimpleLinearRegressor::SimpleLinearRegressor() {
+        coefficients = {1, 1};
+    }
+
     SimpleLinearRegressor::SimpleLinearRegressor(int n_features) {
-        std::vector<double> coeffs(n_features + 1, 0);
-        coeffs[0] = 5000;
-        coeffs[1] = 0;
-        setCoefficients(coeffs);
+        coefficients = {1, 1};
     }
 
     /**
@@ -23,7 +24,7 @@ namespace ml4cpp {
      * @return:: Output prediction
      */
     double SimpleLinearRegressor::predict(const double &x) {
-        return getCoefficients()[0] + getCoefficients()[1] * x;
+        return coefficients[0] + coefficients[1] * x;
     }
 
 
@@ -35,7 +36,7 @@ namespace ml4cpp {
      */
     double SimpleLinearRegressor::meanSquaredError(std::vector<double> X, std::vector<double> Y) {
         double error = 0;
-        for (int i = 0; i < X.size(); i++) {
+        for (size_t i = 0; i < X.size(); i++) {
             error += pow((Y[i] - predict(X[i])), 2);
         }
         return error / X.size();
@@ -55,15 +56,15 @@ namespace ml4cpp {
         double error = 0;
         double mse = 0;
 
-        for (int i = 0; i < X.size(); i++) {
+        for (size_t i = 0; i < X.size(); i++) {
             error = Y[i] - predict(X[i]);
             bias_deriv += -2 * error;
             weight_deriv += -2 * X[i] * error;
             mse += error;
         }
 
-        getCoefficients()[0] -= (bias_deriv / X.size()) * learningRate;
-        getCoefficients()[1] -= (weight_deriv / X.size()) * learningRate;
+        coefficients[0] -= (bias_deriv / X.size()) * learningRate;
+        coefficients[1] -= (weight_deriv / X.size()) * learningRate;
         mse /= X.size();
 
         return mse;
@@ -90,8 +91,8 @@ namespace ml4cpp {
         }
     }
 
-    void SimpleLinearRegressor::gradientDescent() {
-
+    void SimpleLinearRegressor::setCoefficients(std::vector<double> coeff) {
+        coefficients = coeff;
     }
 
 };

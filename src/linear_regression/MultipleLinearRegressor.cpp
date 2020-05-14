@@ -56,14 +56,14 @@ namespace ml4cpp {
         int n_iters = 100;
 
         for (int iter = 0; iter < n_iters; iter++) {
-            for (size_t i = 0; i < X[0].size(); i++) {
-                x = ml4cpp::FileReader::getRow(i, X);
-                error = Y[i] - predict(x);
+            for (size_t i = 0; i < X.size(); i++) {
+
+                error = Y[i] - predict(X[i]);
                 bias_deriv = -2 * bias * error;
                 bias -= (bias_deriv) * learningRate;
 
                 for (size_t j = 0; j < coefficients.size(); j++) {
-                    coeff_deriv = -2 * x[j] * error;
+                    coeff_deriv = -2 * X[i][j] * error;
                     coefficients[j] -= coeff_deriv * learningRate;
                 }
             }
@@ -78,13 +78,10 @@ namespace ml4cpp {
      */
     double MultipleLinearRegressor::meanSquaredError(std::vector<std::vector<double>> X, std::vector<double> Y) {
         double error = 0;
-        std::vector<double> x;
-
-        for (size_t i = 0; i < X[0].size(); i++) {
-            x = {X[0][i], X[1][i], X[2][i], X[3][i]};
-            error += pow(Y[i] - predict(x), 2);
+        for (size_t i = 0; i < X.size(); i++) {
+            error += pow(Y[i] - predict(X[i]), 2);
         }
-        return error / X[0].size();
+        return error / X.size();
     }
 }
 

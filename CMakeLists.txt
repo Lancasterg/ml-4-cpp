@@ -30,7 +30,7 @@ add_executable(
         src/helpers/FileReader.cpp
         src/helpers/FileReader.h
         src/logistic_regression/BinaryLogisticRegressor.cpp
-        src/logistic_regression/BinaryLogisticRegressor.h)
+        src/logistic_regression/BinaryLogisticRegressor.h src/decision_tree/DecisionTreeClassifier.cpp src/decision_tree/DecisionTreeClassifier.h)
 
 add_executable(
         tests
@@ -52,8 +52,11 @@ add_executable(
         src/linear_regression/SimpleLinearRegressor.h
         src/logistic_regression/BinaryLogisticRegressor.cpp
         src/logistic_regression/BinaryLogisticRegressor.h
+        src/decision_tree/DecisionTreeClassifier.cpp
+        src/decision_tree/DecisionTreeClassifier.h
 
         src/helpers/FileReader.cpp
         src/helpers/FileReader.h
         src/libs/csv.h
+        src/test/test_decision_tree_classifier.cpp
 )

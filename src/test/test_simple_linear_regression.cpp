@@ -2,6 +2,47 @@
 #include "../linear_regression/SimpleLinearRegressor.h"
 
 
+/**
+ * Return some simple training data to test fitting and evaluation.
+ * @return Feature vector
+ */
+std::vector<double> getTestX() {
+    std::vector<double> X(1000);
+    for (size_t i = 0; i < 1000; i++) {
+        X[i] = (double) i / 10.0;
+    }
+    return X;
+}
+
+/**
+ * Return some simple training label to test fitting and evaluation.
+ * @param X: Input features
+ * @return Feature vector
+ */
+std::vector<double> getTestY(std::vector<double>X){
+    std::vector<double> Y(X.size());
+
+    for (size_t i = 0; i < X.size(); i++){
+        Y[i] = 100 + (3 * X[i]);
+    }
+    return Y;
+}
+
+
+
+TEST_CASE("Test simple fitting", "[classic]") {
+    std::vector<double> X = getTestX();
+    std::vector<double> Y = getTestY(X);
+
+    ml4cpp::SimpleLinearRegressor model;
+    model.fit(X, Y, 0.0001, 1000);
+
+    std::cout << "" << "";
+
+
+
+}
+
 TEST_CASE("Test simple predictions", "[classic]") {
     ml4cpp::SimpleLinearRegressor model;
 

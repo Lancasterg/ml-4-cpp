@@ -26,4 +26,8 @@ namespace ml4cpp {
 
     }
 
+    void AbstractRegressorModel::setCoefficients(std::vector<double> coeff) {
+        coefficients = coeff;
+    }
+
 } /* namespace ml4cpp */

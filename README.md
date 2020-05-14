@@ -1,17 +1,20 @@
 # ml-4-cpp
 Implementation of some ML algorithms and basic linear algebra in C++, written from scratch.
 
-- SimpleLinearRegressor
-- MultipleLinearRegressor
-- BinaryLogisticRegressor (Not yet implemented)
-- ...
+-[x] SimpleLinearRegressor
+-[x] MultipleLinearRegressor
+-[x] BinaryLogisticRegressor
+-[ ] DecisionTreeClassifier - Work in progress
+-[ ] SupportVectorMachine?
 
 ## TODOs
-- Write a high-performance version of the linalg class.
-- Write tests for SimpleLinearRegressor
-- ~~Implement MultipleLinearRegressor~~ & write tests
-- ~~Implement BinaryLogisticRegressor~~ & write tests
+- ~~Write tests for SimpleLinearRegressor~~
+- ~~Implement MultipleLinearRegressor~~ 
+- ~~Implement BinaryLogisticRegressor & write tests~~
 - ~~Used row-major format for training data~~
+- Write tests for MultipleLinearRegressor
+- Finish implementation of DecisionTreeClassifier
+
 
 ## Tests
 Tests have been written using the [Catch2](https://github.com/catchorg/Catch2) library.

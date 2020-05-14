@@ -11,18 +11,20 @@ namespace ml4cpp {
 
     private:
         LinearAlgebra linalg;
+        std::vector<double> coefficients;
 
         double updateWeights(std::vector<double> X, std::vector<double> Y, double learningRate);
 
     public:
-        SimpleLinearRegressor() = default;
+        SimpleLinearRegressor();
 
         explicit SimpleLinearRegressor(int n_features);
 
         void fit(std::vector<double> x, std::vector<double> y, double learningRate, int iterations);
 
-        void gradientDescent(); // TODO??
         double meanSquaredError(std::vector<double> X, std::vector<double> Y);
+
+        void setCoefficients(std::vector<double> coeff) override;
 
         double predict(const double &x) override;
 

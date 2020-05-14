@@ -18,6 +18,8 @@ namespace ml4cpp {
 
     public:
 
+        std::vector<double> getCoefficients();
+
         double sigmoid(double x);
 
         double predictProba(std::vector<double> x);
