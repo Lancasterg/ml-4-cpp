@@ -1,11 +1,15 @@
 # ml-4-cpp
 Implementation of some ML algorithms and basic linear algebra in C++ written from scratch.
 
--[x] SimpleLinearRegressor
--[x] MultipleLinearRegressor
--[x] BinaryLogisticRegressor
--[ ] DecisionTreeClassifier - Work in progress
--[ ] SupportVectorMachine?
+- [x] SimpleLinearRegressor
+
+- [x] MultipleLinearRegressor
+
+- [x] BinaryLogisticRegressor
+
+- [ ] DecisionTreeClassifier - Work in progress
+
+- [ ] SupportVectorMachine?
 
 
 ## TODOs
