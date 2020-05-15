@@ -13,9 +13,16 @@ namespace ml4cpp {
         ml4cpp::DecisionTreeNode *rightChild = nullptr;
         double value = 0;
         int column = 0;
+        int prediction;
 
     public:
+        bool leaf = false;
+
         DecisionTreeNode() = default;
+
+        void setValue(double val);
+
+        void setColumn(int col);
 
         DecisionTreeNode *getLeftChild();
 
@@ -29,16 +36,31 @@ namespace ml4cpp {
 
         void setParent(DecisionTreeNode *parentNode);
 
-        short int question();
-
         double giniImpurity(std::vector<std::vector<double>> X, std::vector<double> Y);
+
+        short query(std::vector<double> x) const;
+
+
+        std::tuple<std::vector<std::vector<double>>, std::vector<double>, std::vector<std::vector<double>>, std::vector<double>>
+        partition(const std::vector<std::vector<double>> &X, const std::vector<double> &Y);
+
+        double informationGain(std::vector<std::vector<double>> part_trueX, std::vector<double> part_trueY,
+                               std::vector<std::vector<double>> part_falseX, std::vector<double> part_falseY,
+                               double uncertainty);
+
+        std::tuple<double, std::pair<int, double>> findBestSplit(std::vector<std::vector<double>> X, std::vector<double> Y);
+
+        void setPrediction(int pred);
+
+        int getPrediction();
     };
 
 
     class DecisionTreeClassifier {
 
     private:
-        DecisionTreeNode *rootNode;
+        DecisionTreeNode *rootNode = new DecisionTreeNode();
+        DecisionTreeNode *currentNode = rootNode;
 
 
     public:
@@ -47,8 +69,7 @@ namespace ml4cpp {
         void fit(std::vector<std::vector<double>> X, std::vector<double> Y);
         int predict(std::vector<double> x);
 
-
-        void fit(std::vector<std::vector<double>> X);
+        int recursivePredict(std::vector<double> x);
     };
 
 }
