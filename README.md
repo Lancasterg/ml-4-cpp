@@ -11,7 +11,7 @@ Implementation of some ML algorithms and basic linear algebra in C++ written fro
 
 - [x] DecisionTreeRegressor
 
-- [ ] RandomForrestClassifier
+- [ ] RandomForestClassifier
 
 - [ ] SupportVectorMachine?
 
