@@ -140,7 +140,7 @@ namespace ml4cpp {
         std::vector<T> x;
         for (size_t i = 0; i < X[0].size(); i++) {
             x = ml4cpp::FileReader::getRow(i, X);
-            if (predict(x) == Y[i]) {
+            if (this->predict(x) == Y[i]) {
                 n_correct++;
             }
         }
@@ -189,7 +189,7 @@ namespace ml4cpp {
     void BinaryLogisticRegressorRm<T>::evaluate(std::vector<std::vector<T>> X, std::vector<T> Y) {
         int n_correct = 0;
         for (size_t i = 0; i < X.size(); i++) {
-            if (predict(X[i]) == Y[i]) {
+            if (this->predict(X[i]) == Y[i]) {
                 n_correct++;
             }
         }

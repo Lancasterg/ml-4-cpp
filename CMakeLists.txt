@@ -32,7 +32,7 @@ add_executable(
         src/logistic_regression/BinaryLogisticRegressor.cpp
         src/logistic_regression/BinaryLogisticRegressor.h
         src/decision_tree/DecisionTreeClassifier.cpp
-        src/decision_tree/DecisionTreeClassifier.h)
+        src/decision_tree/DecisionTreeClassifier.h src/py_bindings.cpp)
 
 add_executable(
         tests

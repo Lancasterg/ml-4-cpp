@@ -1,5 +1,6 @@
 #include "../libs/catch.hpp"
 #include "../decision_tree/DecisionTreeClassifier.h"
+//#include "../decision_tree/DecisionTreeClassifier.cpp"
 
 
 TEST_CASE("Test Gini impurity ", "[classic]") {

@@ -1,6 +1,7 @@
 #include <FileReader.h>
 #include "../libs/catch.hpp"
 #include "../logistic_regression/BinaryLogisticRegressor.h"
+#include "../logistic_regression/BinaryLogisticRegressor.cpp"
 
 /**
  * Return some simple data to test fitting and evaluation

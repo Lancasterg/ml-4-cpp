@@ -1,5 +1,8 @@
 #include "../libs/catch.hpp"
 #include "../linear_regression/SimpleLinearRegressor.h"
+#include "../linear_regression/SimpleLinearRegressor.cpp"
+#include "../linear_regression/AbstractRegressorModel.cpp"
+
 
 
 /**

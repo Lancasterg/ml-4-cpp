@@ -1,9 +1,14 @@
 #include <iostream>
 #include <chrono>
-#include <BinaryLogisticRegressor.h>
+#include "logistic_regression/BinaryLogisticRegressor.h"
+#include "logistic_regression/BinaryLogisticRegressor.cpp"
 #include "linear_algebra/linalg.h"
+#include "linear_regression/AbstractRegressorModel.h"
+#include "linear_regression/AbstractRegressorModel.cpp"
 #include "linear_regression/SimpleLinearRegressor.h"
 #include "linear_regression/MultipleLinearRegressor.h"
+#include "linear_regression/SimpleLinearRegressor.cpp"
+#include "linear_regression/MultipleLinearRegressor.cpp"
 #include "helpers/FileReader.h"
 
 using namespace std;

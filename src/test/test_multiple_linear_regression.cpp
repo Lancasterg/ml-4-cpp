@@ -1,5 +1,7 @@
 #include "../libs/catch.hpp"
-#include <MultipleLinearRegressor.h>
+#include "../linear_regression/MultipleLinearRegressor.h"
+#include <../linear_regression/MultipleLinearRegressor.cpp> // required for templating
+#include "../linear_regression/AbstractRegressorModel.cpp" // required for templating
 #include <FileReader.h>
 
 
@@ -15,7 +17,7 @@ TEST_CASE("Test multiple predictions", "[classic]") {
 
 
 TEST_CASE("Test multiple regression fitting", "[classic]") {
-    std::string test_path = "/Users/george.lancaster/Projects/learning/cpp/ml-4-cpp/data/multiple_linear_regression_data.csv";
+    std::string test_path = "/Users/george/eclipse-workspace/ml-4-cpp/data/multiple_linear_regression_data.csv";
     ml4cpp::FileReader fileReader;
     int numFeatures = 4;
 
