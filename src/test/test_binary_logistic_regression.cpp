@@ -61,7 +61,7 @@ TEST_CASE("Test binary logistic regression fitting row-major", "[classic]") {
     }
 
     X = ml4cpp::LinearAlgebra::normaliseDataRm(X);
-    ml4cpp::BinaryLogisticRegressorRm model(numFeatures);
+    ml4cpp::BinaryLogisticRegressorRm<double> model(numFeatures);
     model.fit(X, Y);
     model.evaluate(X, Y);
 
@@ -83,7 +83,7 @@ TEST_CASE("Test binary logistic regression fitting column-major", "[classic]") {
     }
 
     X = ml4cpp::LinearAlgebra::normaliseDataCm(X);
-    ml4cpp::BinaryLogisticRegressorCm model(numFeatures);
+    ml4cpp::BinaryLogisticRegressorCm<double> model(numFeatures);
     model.fit(X, Y);
     model.evaluate(X, Y);
 
@@ -93,7 +93,7 @@ TEST_CASE("Test binary logistic regression fitting column-major", "[classic]") {
 }
 
 TEST_CASE("Test sigmoid function", "[classic]") {
-    ml4cpp::AbstractBinaryLogisticRegressor model;
+    ml4cpp::AbstractBinaryLogisticRegressor<double> model;
 
     REQUIRE(model.sigmoid(100) == 100 / (1.0 + std::fabs(100)));
     REQUIRE(model.sigmoid(0.222) == 0.222 / (1.0 + std::fabs(0.222)));

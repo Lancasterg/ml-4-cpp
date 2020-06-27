@@ -9,24 +9,29 @@
 
 namespace ml4cpp {
 
-    AbstractRegressorModel::AbstractRegressorModel() {
+    template <class T>
+    AbstractRegressorModel<T>::AbstractRegressorModel() {
         // TODO Auto-generated constructor stub
 
     }
 
-    AbstractRegressorModel::~AbstractRegressorModel() {
+    template <class T>
+    AbstractRegressorModel<T>::~AbstractRegressorModel() {
         // TODO Auto-generated destructor stub
     }
 
-    double AbstractRegressorModel::predict(const double &x) {
+    template <class T>
+    double AbstractRegressorModel<T>::predict(const T &x) {
         return 0;
     }
 
-    void AbstractRegressorModel::fit(std::vector<double> X, std::vector<double> Y) {
+    template <class T>
+    void AbstractRegressorModel<T>::fit(std::vector<T> X, std::vector<T> Y) {
 
     }
 
-    void AbstractRegressorModel::setCoefficients(std::vector<double> coeff) {
+    template <class T>
+    void AbstractRegressorModel<T>::setCoefficients(std::vector<T> coeff) {
         coefficients = coeff;
     }
 

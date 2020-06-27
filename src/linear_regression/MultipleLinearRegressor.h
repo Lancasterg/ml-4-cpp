@@ -7,7 +7,8 @@
 
 namespace ml4cpp {
 
-    class MultipleLinearRegressor : public AbstractRegressorModel {
+    template<class T>
+    class MultipleLinearRegressor : public AbstractRegressorModel<T> {
     private:
         double bias;
         std::vector<double> coefficients;
@@ -18,14 +19,14 @@ namespace ml4cpp {
 
         explicit MultipleLinearRegressor(int n_features);
 
-        double predict(const std::vector<double>& X);
+        double predict(const std::vector<T>& X);
 
         // Fit the model
-        void fit(Matrix X, std::vector<double> Y);
+        void fit(std::vector<std::vector<T>> X, std::vector<T> Y);
 
         void setCoefficients(double add_coeff, std::vector<double> coeff);
 
-        double meanSquaredError(Matrix X, std::vector<double> Y);
+        double meanSquaredError(std::vector<std::vector<T>> X, std::vector<T> Y);
     };
 }
 

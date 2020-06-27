@@ -1,3 +1,5 @@
+#include <climits>
+
 #ifndef SimpleLinearRegressor_H_
 #define SimpleLinearRegressor_H_
 
@@ -7,26 +9,25 @@
 
 namespace ml4cpp {
 
-    class SimpleLinearRegressor : public AbstractRegressorModel {
+    template<class T>
+    class SimpleLinearRegressor : public AbstractRegressorModel<T> {
 
     private:
-        LinearAlgebra linalg;
+        __unused  LinearAlgebra linalg;
         std::vector<double> coefficients;
 
-        double updateWeights(std::vector<double> X, std::vector<double> Y, double learningRate);
+        inline double updateWeights(std::vector<T> X, std::vector<T> Y, double learningRate);
 
     public:
-        SimpleLinearRegressor();
+        inline SimpleLinearRegressor(int i);
 
-        explicit SimpleLinearRegressor(int n_features);
+        inline void fit(std::vector<T> x, std::vector<T> y, double learningRate, int iterations);
 
-        void fit(std::vector<double> x, std::vector<double> y, double learningRate, int iterations);
+        inline double meanSquaredError(std::vector<T> X, std::vector<T> Y);
 
-        double meanSquaredError(std::vector<double> X, std::vector<double> Y);
+        inline void setCoefficients(std::vector<T> coeff) override;
 
-        void setCoefficients(std::vector<double> coeff) override;
-
-        double predict(const double &x) override;
+        inline double predict(const T &x) override;
 
     };
 };

@@ -30,7 +30,9 @@ add_executable(
         src/helpers/FileReader.cpp
         src/helpers/FileReader.h
         src/logistic_regression/BinaryLogisticRegressor.cpp
-        src/logistic_regression/BinaryLogisticRegressor.h src/decision_tree/DecisionTreeClassifier.cpp src/decision_tree/DecisionTreeClassifier.h)
+        src/logistic_regression/BinaryLogisticRegressor.h
+        src/decision_tree/DecisionTreeClassifier.cpp
+        src/decision_tree/DecisionTreeClassifier.h)
 
 add_executable(
         tests

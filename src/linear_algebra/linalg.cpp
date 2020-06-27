@@ -21,7 +21,7 @@ namespace ml4cpp {
             exit(-1);
         }
 
-        for (int i = 0; i < a.size(); i++) {
+        for (size_t i = 0; i < a.size(); i++) {
             a[i] += b[i];
         }
 
@@ -36,8 +36,8 @@ namespace ml4cpp {
      * @return
      */
     Matrix LinearAlgebra::scalarMatMult(double s, Matrix m) {
-        for (int i = 0; i < m.size(); i++) {
-            for (int j = 0; j < m[0].size(); j++) {
+        for (size_t i = 0; i < m.size(); i++) {
+            for (size_t j = 0; j < m[0].size(); j++) {
                 m[i][j] *= s;
             }
         }
@@ -62,13 +62,13 @@ namespace ml4cpp {
         // Instantiate result matrix
         std::vector<std::vector<double>> mat(a.size());
 
-        for (int i = 0; i < b[1].size(); i++) {
+        for (size_t i = 0; i < b[1].size(); i++) {
             mat[i].resize(b[1].size());
         }
 
-        for (int i = 0; i < a.size(); ++i) {
-            for (int j = 0; j < b.size(); ++j) {
-                for (int k = 0; k < a[0].size(); ++k) {
+        for (size_t i = 0; i < a.size(); ++i) {
+            for (size_t j = 0; j < b.size(); ++j) {
+                for (size_t k = 0; k < a[0].size(); ++k) {
                     mat[i][j] += a[i][k] * b[k][j];
                 }
             }
@@ -92,7 +92,7 @@ namespace ml4cpp {
 
         double ret = 0;
 
-        for (int i = 0; i < a.size(); i++) {
+        for (size_t i = 0; i < a.size(); i++) {
             ret += a[i] * b[i];
         }
 
@@ -106,7 +106,7 @@ namespace ml4cpp {
      */
     void LinearAlgebra::printColumnVector(std::vector<double> vec) {
 
-        for (int i = 0; i < vec.size(); i++) {
+        for (size_t i = 0; i < vec.size(); i++) {
             if (i < vec.size() - 1) {
                 printf("%f, ", vec[i]);
             } else {
@@ -131,7 +131,7 @@ namespace ml4cpp {
      */
     void LinearAlgebra::printMatrix(Matrix mat) {
         printf("[");
-        for (int i = 0; i < mat.size(); i++) {
+        for (size_t i = 0; i < mat.size(); i++) {
 
             printVector(mat[i]);
 
@@ -163,7 +163,7 @@ namespace ml4cpp {
         std::vector<double> means(mat.size());
         std::vector<double> std_devs(mat.size());
 
-        for (int i = 0; i < mat.size(); i++){
+        for (size_t i = 0; i < mat.size(); i++){
             means[i] = std::accumulate(mat[i].begin(), mat[i].end(), 0.0);
             means[i] /= mat[i].size();
 
@@ -171,8 +171,8 @@ namespace ml4cpp {
             std_devs[i] = std::sqrt(sq_sum / mat[i].size() - means[i] * means[i]);
         }
 
-        for (int i = 0; i < mat.size(); i++){
-            for (int j = 0; j < mat[i].size(); j++){
+        for (size_t i = 0; i < mat.size(); i++){
+            for (size_t j = 0; j < mat[i].size(); j++){
                 mat[i][j] = (mat[i][j] - means[i]) / std_devs[i];
             }
         }

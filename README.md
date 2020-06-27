@@ -26,7 +26,8 @@ Implementation of some ML algorithms and basic linear algebra in C++ written fro
 - ~~Used row-major format for training data~~
 - Write tests for MultipleLinearRegressor
 - ~~Finish implementation of DecisionTreeClassifier~~
-- Fix main so that everything actually works (not just the tests)
+- Fix main so that everything works (not just the tests)
+- Rewrite all code to use templates
 
 
 ## Tests

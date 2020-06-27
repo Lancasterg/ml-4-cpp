@@ -34,7 +34,7 @@ TEST_CASE("Test simple fitting", "[classic]") {
     std::vector<double> X = getTestX();
     std::vector<double> Y = getTestY(X);
 
-    ml4cpp::SimpleLinearRegressor model;
+    ml4cpp::SimpleLinearRegressor<double> model(0);
     model.fit(X, Y, 0.0001, 1000);
 
     std::cout << "" << "";
@@ -44,7 +44,7 @@ TEST_CASE("Test simple fitting", "[classic]") {
 }
 
 TEST_CASE("Test simple predictions", "[classic]") {
-    ml4cpp::SimpleLinearRegressor model;
+    ml4cpp::SimpleLinearRegressor<double> model(0);
 
     // Test 1
     model.setCoefficients({1, 2});

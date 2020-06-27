@@ -16,7 +16,7 @@ void runSimpleLinearRegression(Matrix mat){
 	vector<double> Y = mat[1];
 
 	LinearAlgebra linalg;
-	SimpleLinearRegressor model(1);
+	SimpleLinearRegressor<double> model(1);
 
 	auto start = high_resolution_clock::now();
 	model.fit(X, Y, 0.0000001, 100000);
@@ -33,7 +33,7 @@ void runMultipleLinearRegression(Matrix mat){
 	Matrix X;
 	vector<double> Y;
 	LinearAlgebra linalg;
-	MultipleLinearRegressor model(mat.size());
+	MultipleLinearRegressor<double> model(mat.size());
 
 	// Create feature matrix
 	// Put 1 in first column to
@@ -62,7 +62,7 @@ void runLogisticRegression(Matrix mat){
     }
 
     X = ml4cpp::LinearAlgebra::normaliseDataRm(X);
-    BinaryLogisticRegressorRm model(numFeatures);
+    BinaryLogisticRegressorRm<double> model(numFeatures);
     model.fit(X, Y);
     model.evaluate(X, Y);
 

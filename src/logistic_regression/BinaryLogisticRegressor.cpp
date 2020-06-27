@@ -11,7 +11,8 @@ namespace ml4cpp {
     * @param x: Input to Sigmoid function
     * @return Sigmoid approximation
     */
-    double AbstractBinaryLogisticRegressor::sigmoid(double x) {
+    template<class T>
+    double AbstractBinaryLogisticRegressor<T>::sigmoid(T x) {
         return x / (1.0 + std::fabs(x));
     }
 
@@ -20,7 +21,8 @@ namespace ml4cpp {
     * @param x: feature vector
     * @return The probability of being in class 1 in range 0-1
     */
-    double AbstractBinaryLogisticRegressor::predictProba(std::vector<double> x) {
+    template<class T>
+    double AbstractBinaryLogisticRegressor<T>::predictProba(std::vector<T> x) {
         return sigmoid(bias + ml4cpp::LinearAlgebra::dotProd(x, coefficients));
     }
 
@@ -29,7 +31,8 @@ namespace ml4cpp {
     * @param x: Feature vector
     * @return The predicted class
     */
-    int AbstractBinaryLogisticRegressor::predict(std::vector<double> x) {
+    template<class T>
+    int AbstractBinaryLogisticRegressor<T>::predict(std::vector<T> x) {
         if (predictProba(x) > threshold) {
             return 1;
         } else {
@@ -37,11 +40,13 @@ namespace ml4cpp {
         }
     }
 
-    void AbstractBinaryLogisticRegressor::fit(std::vector<std::vector<double>> X, std::vector<double> Y) {
+    template<class T>
+    void AbstractBinaryLogisticRegressor<T>::fit(std::vector<std::vector<T>> X, std::vector<T> Y) {
         // Do nothing
     }
 
-    void AbstractBinaryLogisticRegressor::evaluate(std::vector<std::vector<double>> X, std::vector<double> Y) {
+    template<class T>
+    void AbstractBinaryLogisticRegressor<T>::evaluate(std::vector<std::vector<T>> X, std::vector<T> Y) {
         // Do nothing
     }
 
@@ -49,7 +54,8 @@ namespace ml4cpp {
      * Getter method for coefficients
      * @return
      */
-    std::vector<double> AbstractBinaryLogisticRegressor::getCoefficients() {
+    template<class T>
+    std::vector<double> AbstractBinaryLogisticRegressor<T>::getCoefficients() {
         return coefficients;
     }
 
@@ -58,11 +64,12 @@ namespace ml4cpp {
      * Constructor for BinaryLogisticRegressor
      * @param n_features: Number of features
      */
-    BinaryLogisticRegressorCm::BinaryLogisticRegressorCm(int n_features) {
-        bias = 1;
-        coefficients = std::vector<double>(n_features);
-        num_coefficients = n_features;
-        threshold = 0.5;
+    template<class T>
+    BinaryLogisticRegressorCm<T>::BinaryLogisticRegressorCm(int n_features) {
+        this->bias = 1;
+        this->coefficients = std::vector<double>(n_features);
+        this->num_coefficients = n_features;
+        this->threshold = 0.5;
     }
 
 
@@ -71,7 +78,8 @@ namespace ml4cpp {
      * @param X: Fit the model using stochastic gradient descent
      * @param Y: Target classes
      */
-    void BinaryLogisticRegressorCm::fit(Matrix X, std::vector<double> Y) {
+    template<class T>
+    void BinaryLogisticRegressorCm<T>::fit(std::vector<std::vector<T>> X, std::vector<T> Y) {
 
         double error, bias_deriv, coeff_deriv;
         double learningRate = 0.001;
@@ -82,19 +90,17 @@ namespace ml4cpp {
             for (size_t i = 0; i < X[0].size(); i++) {
                 x = ml4cpp::FileReader::getRow(i, X);
 
-                error = Y[i] - predict(x);
-                bias_deriv = -2 * bias * error;
-                bias -= (bias_deriv) * learningRate;
+                error = Y[i] - this->predict(x);
+                bias_deriv = -2 * this->bias * error;
+                this->bias -= (bias_deriv) * learningRate;
 
-                for (size_t j = 0; j < coefficients.size(); j++) {
+                for (size_t j = 0; j < this->coefficients.size(); j++) {
                     coeff_deriv = -2 * x[j] * error;
-                    coefficients[j] -= coeff_deriv * learningRate;
+                    this->coefficients[j] -= coeff_deriv * learningRate;
                 }
             }
         }
     }
-
-
 
 
     /**
@@ -103,18 +109,19 @@ namespace ml4cpp {
      * @param Y: Target classes
      * @return The calculated cross-entropy
      */
-    double BinaryLogisticRegressorCm::crossEntropy(Matrix X, std::vector<double> Y) {
-        double cost_0 = 0;
-        double cost_1 = 0;
-        std::vector<double> x;
+    template <class T>
+    double BinaryLogisticRegressorCm<T>::crossEntropy(std::vector<std::vector<T>> X, std::vector<T> Y) {
+        T cost_0 = 0;
+        T cost_1 = 0;
+        std::vector<T> x;
 
         for (size_t i = 0; i < X[0].size(); i++) {
             x = ml4cpp::FileReader::getRow(i, X);
 
             if (Y[i] == 1) {
-                cost_1 += -log(predict(x));
+                cost_1 += -log(this->predict(x));
             } else {
-                cost_0 += -log(1 - predict(x));
+                cost_0 += -log(1 - this->predict(x));
             }
         }
 
@@ -127,9 +134,10 @@ namespace ml4cpp {
      * @param X: Feature vectors
      * @param Y: Target classes
      */
-    void BinaryLogisticRegressorCm::evaluate(Matrix X, std::vector<double> Y) {
+    template<class T>
+    void BinaryLogisticRegressorCm<T>::evaluate(std::vector<std::vector<T>> X, std::vector<T> Y) {
         int n_correct = 0;
-        std::vector<double> x;
+        std::vector<T> x;
         for (size_t i = 0; i < X[0].size(); i++) {
             x = ml4cpp::FileReader::getRow(i, X);
             if (predict(x) == Y[i]) {
@@ -148,7 +156,8 @@ namespace ml4cpp {
     * @param X: Feature vectors
     * @param Y: Target classes
     */
-    void BinaryLogisticRegressorRm::fit(Matrix X, std::vector<double> Y) {
+    template<class T>
+    void BinaryLogisticRegressorRm<T>::fit(std::vector<std::vector<T>> X, std::vector<T> Y) {
 
         double error, bias_deriv, coeff_deriv;
         double learningRate = 0.001;
@@ -159,13 +168,13 @@ namespace ml4cpp {
             for (size_t i = 0; i < X.size(); i++) {
                 x = X[i];
 
-                error = Y[i] - predict(x);
-                bias_deriv = -2 * bias * error;
-                bias -= (bias_deriv) * learningRate;
+                error = Y[i] - this->predict(x);
+                bias_deriv = -2 * this->bias * error;
+                this->bias -= (bias_deriv) * learningRate;
 
-                for (size_t j = 0; j < coefficients.size(); j++) {
+                for (size_t j = 0; j < this->coefficients.size(); j++) {
                     coeff_deriv = -2 * x[j] * error;
-                    coefficients[j] -= coeff_deriv * learningRate;
+                    this->coefficients[j] -= coeff_deriv * learningRate;
                 }
             }
         }
@@ -176,9 +185,9 @@ namespace ml4cpp {
     * @param X: Feature vectors
     * @param Y: Target classes
     */
-    void BinaryLogisticRegressorRm::evaluate(Matrix X, std::vector<double> Y) {
+    template<class T>
+    void BinaryLogisticRegressorRm<T>::evaluate(std::vector<std::vector<T>> X, std::vector<T> Y) {
         int n_correct = 0;
-        std::vector<double> x;
         for (size_t i = 0; i < X.size(); i++) {
             if (predict(X[i]) == Y[i]) {
                 n_correct++;
@@ -191,14 +200,16 @@ namespace ml4cpp {
      * Constructor for row-major BinarBinaryLogisticRegressor
      * @param n_features
      */
-    BinaryLogisticRegressorRm::BinaryLogisticRegressorRm(int n_features) {
-        bias = 1;
-        coefficients = std::vector<double>(n_features);
-        num_coefficients = n_features;
-        threshold = 0.5;
+    template<class T>
+    BinaryLogisticRegressorRm<T>::BinaryLogisticRegressorRm(int n_features) {
+        this->bias = 1;
+        this->coefficients = std::vector<double>(n_features);
+        this->num_coefficients = n_features;
+        this->threshold = 0.5;
     }
 
-    double BinaryLogisticRegressorRm::crossEntropy(std::vector<std::vector<double>> X, std::vector<double> Y) {
+    template<class T>
+    double BinaryLogisticRegressorRm<T>::crossEntropy(std::vector<std::vector<T>> X, std::vector<T> Y) {
         return 0;
     }
 }

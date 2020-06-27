@@ -5,6 +5,7 @@
 
 namespace ml4cpp {
 
+    template<class T>
     class AbstractRegressorModel {
 
     private:
@@ -15,15 +16,15 @@ namespace ml4cpp {
 
         virtual ~AbstractRegressorModel();
 
-        virtual void setCoefficients(std::vector<double> coeff);
+        virtual void setCoefficients(std::vector<T> coeff);
 
-        std::vector<double> getCoefficients() { return coefficients; };
+        std::vector<T> getCoefficients() { return coefficients; };
 
         // Make a prediction
-        virtual double predict(const double &x);
+        virtual double predict(const T &x);
 
-        // Fit the model
-        void fit(std::vector<double> X, std::vector<double> Y);
+        virtual // Fit the model
+        void fit(std::vector<T> X, std::vector<T> Y);
 
 
     };

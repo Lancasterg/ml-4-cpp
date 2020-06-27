@@ -17,9 +17,10 @@ namespace ml4cpp {
      * Initialise coefficients to 0, except for the first
      * @param n_features: number of features = number of coefficients
      */
-    MultipleLinearRegressor::MultipleLinearRegressor(int n_features) {
+    template<class T>
+    MultipleLinearRegressor<T>::MultipleLinearRegressor(int n_features) {
         bias = 1;
-        coefficients = std::vector<double>(n_features, 1);
+        coefficients = std::vector<T>(n_features, 1);
         num_coefficients = n_features;
     }
 
@@ -28,7 +29,8 @@ namespace ml4cpp {
      * @param add_coeff: The additive coefficient
      * @param coeff: The multiplicative coefficients
      */
-    void MultipleLinearRegressor::setCoefficients(double add_coeff, std::vector<double> coeff) {
+    template<class T>
+    void MultipleLinearRegressor<T>::setCoefficients(double add_coeff, std::vector<double> coeff) {
         bias = add_coeff;
         coefficients = std::move(coeff);
         num_coefficients = int(coefficients.size());
@@ -39,7 +41,8 @@ namespace ml4cpp {
      * @param X: Feature vector
      * @return result of prediction
      */
-    double MultipleLinearRegressor::predict(const std::vector<double> &X) {
+    template<class T>
+    double MultipleLinearRegressor<T>::predict(const std::vector<T> &X) {
         return bias + ml4cpp::LinearAlgebra::dotProd(X, coefficients);
     }
 
@@ -49,10 +52,11 @@ namespace ml4cpp {
      * @param X: Training values
      * @param Y: Target values
      */
-    void MultipleLinearRegressor::fit(Matrix X, std::vector<double> Y) {
+    template<class T>
+    void MultipleLinearRegressor<T>::fit(std::vector<std::vector<T>> X, std::vector<T> Y) {
         double error, bias_deriv, coeff_deriv;
         double learningRate = 0.001;
-        std::vector<double> x;
+        std::vector<T> x;
         int n_iters = 100;
 
         for (int iter = 0; iter < n_iters; iter++) {
@@ -76,7 +80,8 @@ namespace ml4cpp {
      * @param Y: Target predictions
      * @return
      */
-    double MultipleLinearRegressor::meanSquaredError(std::vector<std::vector<double>> X, std::vector<double> Y) {
+    template<class T>
+    double MultipleLinearRegressor<T>::meanSquaredError(std::vector<std::vector<T>> X, std::vector<T> Y) {
         double error = 0;
         for (size_t i = 0; i < X.size(); i++) {
             error += pow(Y[i] - predict(X[i]), 2);

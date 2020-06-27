@@ -7,59 +7,59 @@
 
 namespace ml4cpp {
 
-
+    template<class T>
     class AbstractBinaryLogisticRegressor {
 
     protected:
         std::vector<double> coefficients;
-        double bias;
-        double threshold;
-        int num_coefficients;
+        double bias = 0;
+        double threshold = 0;
+        int num_coefficients= 0;
 
     public:
 
         std::vector<double> getCoefficients();
 
-        double sigmoid(double x);
+        double sigmoid(T x);
 
-        double predictProba(std::vector<double> x);
+        double predictProba(std::vector<T> x);
 
-        int predict(std::vector<double> x);
+        int predict(std::vector<T> x);
 
-        virtual void fit(std::vector<std::vector<double>> X, std::vector<double> Y);
+        virtual void fit(std::vector<std::vector<T>> X, std::vector<T> Y);
 
-        virtual void evaluate(std::vector<std::vector<double>> X, std::vector<double> Y);
+        virtual void evaluate(std::vector<std::vector<T>> X, std::vector<T> Y);
     };
 
-
-    class BinaryLogisticRegressorCm : public AbstractBinaryLogisticRegressor {
+    template <class T>
+    class BinaryLogisticRegressorCm : public AbstractBinaryLogisticRegressor<T> {
 
 
     public:
 
         explicit BinaryLogisticRegressorCm(int n_features);
 
-        void fit(std::vector<std::vector<double>> X, std::vector<double> Y) override;
+        void fit(std::vector<std::vector<T>> X, std::vector<T> Y) override;
 
-        double crossEntropy(std::vector<std::vector<double>> X, std::vector<double> Y);
+        double crossEntropy(std::vector<std::vector<T>> X, std::vector<T> Y);
 
-        void evaluate(std::vector<std::vector<double>> X, std::vector<double> Y) override;
+        void evaluate(std::vector<std::vector<T>> X, std::vector<T> Y) override;
 
     };
 
-
-    class BinaryLogisticRegressorRm : public AbstractBinaryLogisticRegressor {
+    template<class T>
+    class BinaryLogisticRegressorRm : public AbstractBinaryLogisticRegressor<T> {
 
     public:
         BinaryLogisticRegressorRm() = default;
 
         explicit BinaryLogisticRegressorRm(int n_features);
 
-        void fit(std::vector<std::vector<double>> X, std::vector<double> Y) override;
+        void fit(std::vector<std::vector<T>> X, std::vector<T> Y) override;
 
-        double crossEntropy(std::vector<std::vector<double>> X, std::vector<double> Y);
+        double crossEntropy(std::vector<std::vector<T>> X, std::vector<T> Y);
 
-        void evaluate(std::vector<std::vector<double>> X, std::vector<double> Y) override;
+        void evaluate(std::vector<std::vector<T>> X, std::vector<T> Y) override;
 
     };
 }

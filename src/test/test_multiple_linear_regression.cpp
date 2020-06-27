@@ -7,7 +7,7 @@
 
 
 TEST_CASE("Test multiple predictions", "[classic]") {
-    ml4cpp::MultipleLinearRegressor model;
+    ml4cpp::MultipleLinearRegressor<double> model;
     model.setCoefficients(10, {1, 2});
     REQUIRE(model.predict({1, 10}) == 31);
 
@@ -31,7 +31,7 @@ TEST_CASE("Test multiple regression fitting", "[classic]") {
 
     X = ml4cpp::LinearAlgebra::normaliseDataRm(X);
 
-    ml4cpp::MultipleLinearRegressor model(numFeatures);
+    ml4cpp::MultipleLinearRegressor<double> model(numFeatures);
 
     model.fit(X, Y);
 

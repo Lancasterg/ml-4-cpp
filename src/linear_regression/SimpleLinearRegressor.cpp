@@ -10,11 +10,8 @@
 
 namespace ml4cpp {
 
-    SimpleLinearRegressor::SimpleLinearRegressor() {
-        coefficients = {1, 1};
-    }
-
-    SimpleLinearRegressor::SimpleLinearRegressor(int n_features) {
+    template<class T>
+    SimpleLinearRegressor<T>::SimpleLinearRegressor(int i) {
         coefficients = {1, 1};
     }
 
@@ -23,7 +20,8 @@ namespace ml4cpp {
      * @param x: Input value
      * @return:: Output prediction
      */
-    double SimpleLinearRegressor::predict(const double &x) {
+    template<class T>
+    double SimpleLinearRegressor<T>::predict(const T &x) {
         return coefficients[0] + coefficients[1] * x;
     }
 
@@ -34,7 +32,8 @@ namespace ml4cpp {
      * @param Y: Target values
      * @return
      */
-    double SimpleLinearRegressor::meanSquaredError(std::vector<double> X, std::vector<double> Y) {
+     template<class T>
+    double SimpleLinearRegressor<T>::meanSquaredError(std::vector<T> X, std::vector<T> Y) {
         double error = 0;
         for (size_t i = 0; i < X.size(); i++) {
             error += pow((Y[i] - predict(X[i])), 2);
@@ -50,7 +49,8 @@ namespace ml4cpp {
      * @param learningRate: Rate at which to update weights
      * @return
      */
-    double SimpleLinearRegressor::updateWeights(std::vector<double> X, std::vector<double> Y, double learningRate) {
+     template<class T>
+    double SimpleLinearRegressor<T>::updateWeights(std::vector<T> X, std::vector<T> Y, double learningRate) {
         double bias_deriv = 0;
         double weight_deriv = 0;
         double error = 0;
@@ -77,7 +77,8 @@ namespace ml4cpp {
      * @param learningRate: Rate at which to update weights
      * @param iterations: Number of training iterations
      */
-    void SimpleLinearRegressor::fit(std::vector<double> X, std::vector<double> Y, double learningRate, int iterations) {
+    template <class T>
+    void SimpleLinearRegressor<T>::fit(std::vector<T> X, std::vector<T> Y, double learningRate, int iterations) {
         double mse = 0;
         double prev_mse = -1;
 
@@ -91,7 +92,8 @@ namespace ml4cpp {
         }
     }
 
-    void SimpleLinearRegressor::setCoefficients(std::vector<double> coeff) {
+    template<class T>
+    void SimpleLinearRegressor<T>::setCoefficients(std::vector<T> coeff) {
         coefficients = coeff;
     }
 
